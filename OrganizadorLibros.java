@@ -54,7 +54,7 @@ public class OrganizadorLibros {
      */
     private ArrayList<Libro> orderBy(String atributo, boolean ordenInverso) {
         ArrayList<Libro> arrayADevolver = new ArrayList<>();
-        ArrayList<Libro> copiaLibros = clonarLibros();
+        ArrayList<Libro> copiaLibros = (ArrayList<Libro>) libros.clone();
         for(int i = 0; i < copiaLibros.size(); i = 0) {
             Libro primerLibro = copiaLibros.get(i); //El libro que debe ser impreso en primer lugar cada iteracion.
             for(int j = 0; j < copiaLibros.size(); j++) {
@@ -81,17 +81,6 @@ public class OrganizadorLibros {
      */
     public void mostrarTodos() {
         imprimir(libros);
-    }
-    
-    /**
-     * Devuelve una coleccion identica a libros.
-     */
-    private ArrayList<Libro> clonarLibros() {
-        ArrayList<Libro> copiaLibros = new ArrayList<>();
-        for(Libro libro: libros) {
-            copiaLibros.add(libro);
-        }
-        return copiaLibros;
     }
     
     /**
@@ -134,56 +123,86 @@ public class OrganizadorLibros {
     /**
      * Cambia el valor del isbn del libro que ocupa la posicion indicada por parametro.
      * @param isbn El nuevo isbn.
-     * @param index La posicion del libro a modificar.
+     * @param id El ID del libro a modificar.
      */
     public void setIsbn(int index, String isbn) {
-        if(validarIndex(index)){
-            libros.get(index).setIsbn(isbn);
+        int i = 0;
+        while(i < libros.size()) {
+            Libro libroActual = libros.get(i);
+            if(libroActual.getID() == id){
+                    libros.get(index).setIsbn(isbn);
+                    i = libros.size();
+            }
+            i++;
         }
     }
     
     /**
      * Cambia el valor del titulo del libro que ocupa la posicion indicada por parametro.
      * @param titulo El nuevo titulo.
-     * @param index La posicion del libro a modificar.
+     * @param id El ID del libro a modificar.
      */
-    public void setTitulo(int index, String titulo) {
-        if(validarIndex(index)){
-            libros.get(index).setTitulo(titulo);
+    public void setTitulo(int id, String titulo) {
+        int i = 0;
+        while(i < libros.size()) {
+             Libro libroActual = libros.get(i);
+             if(libroActual.getID() == id){
+                    libros.get(i).setTitulo(titulo);
+                    i = libros.size();
+             }
+             i++;
         }
     }
     
     /**
      * Cambia el valor del autor del libro que ocupa la posicion indicada por parametro.
      * @param autor El nuevo autor.
-     * @param index La posicion del libro a modificar.
+     * @param id El ID del libro a modificar.
      */
-    public void setAutor(int index, String autor) {
-        if(validarIndex(index)){
-            libros.get(index).setAutor(autor);
-        }
+    public void setAutor(int id, String autor) {
+        int i = 0;
+        while(i < libros.size()) {
+             Libro libroActual = libros.get(i);
+             if(libroActual.getID() == id){
+                    libros.get(i).setAutor(autor);
+                    i = libros.size();
+             }
+             i++;
+         }
     }
     
     /**
      * Cambia el valor del ano del libro que ocupa la posicion indicada por parametro.
      * @param ano El nuevo ano.
-     * @param index La posicion del libro a modificar.
+     * @param id El ID del libro a modificar.
      */
-    public void setAno(int index, int ano) {
-        if(validarIndex(index)){
-            libros.get(index).setAno(ano);
+    public void setAno(int id, int ano) {
+        int i = 0;
+        while(i < libros.size()) {
+             Libro libroActual = libros.get(i);
+             if(libroActual.getID() == id){
+                    libros.get(i).setAno(ano);
+                    i = libros.size();
+             }
+             i++;
         }
     }
     
      /**
      * Cambia el valor del numero de paginas del libro que ocupa la posicion indicada por parametro.
      * @param numPags El nuevo numero de paginas.
-     * @param index La posicion del libro a modificar.
+     * @param id El ID del libro a modificar.
      */
-    public void setNumPags(int index, int numPags) {
-        if(validarIndex(index)){
-            libros.get(index).setNumPags(numPags);
-        }
+    public void setNumPags(int id, int numPags) {
+        int i = 0; 
+        while(i < libros.size()) {
+             Libro libroActual = libros.get(i);
+             if(libroActual.getID() == id){
+                    libros.get(i).setNumPags(numPags);
+                    i = libros.size();
+             }
+             i++;
+         }
     }
     
     /**
