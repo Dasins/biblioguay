@@ -83,7 +83,7 @@ public class OrganizadorLibros {
      * Muestra los libros de cada ano:
      */
     public void mostrarPorAno() {
-        ArrayList<Libro> copiaLibros = new ArrayList<>(libros);
+        ArrayList<Libro> copiaLibros = new ArrayList<>(orderBy("autor",false));    
         System.out.println("ID\tISBN\t\tAutor/es\t\tPags\tAno\tTitulo");
         while(copiaLibros.size() > 0){
             int buscado = copiaLibros.get(0).getAno();
