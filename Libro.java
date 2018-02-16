@@ -86,7 +86,7 @@ public class Libro {
    /**
     * @return Devuelve toda la informacion del libro como cadena.
     */
-   public String getInfo() {
+   public String toString() {
        String info = id + ".\t" + isbn + "\t" +  autor + "\t\t" + numPags + "\t" + ano + "\t" + titulo;
        return info;
    }

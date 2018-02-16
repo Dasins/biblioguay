@@ -1,14 +1,18 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
- * Almacena la informacion de una coleccion de libros
+ * Crea objetos que simulan un organizador de libros.
+ * 
  *
- * Inicio: 19:42
- * Ultimo commit: 21:17
+ * Inicio:12:12
+ * Ultimo commit: 
  *
  * @author Dasins
- * @version 25/01/2018
+ * @version 16/02/2018
  */
 public class OrganizadorLibros {
     // Coleccion de libros
@@ -17,12 +21,64 @@ public class OrganizadorLibros {
     int id;
     
     /**
-     * Constructor de objetos de la clase Libreria.
+     * Construye un organizador de libros vacios
      */
     public OrganizadorLibros() {
         libros = new ArrayList<>();
         id = 0;
     }
+    
+    /**
+     * Construye un organizador de libros a partir de un archivo de texto.
+     * El formato del archivo de texto debe ser 
+     */
+    public OrganizadorLibros(String rutaArchivo) {
+        libros = new ArrayList<>();
+        id = 0;
+        addLibro(rutaArchivo);
+    }
+    
+    /**
+     * Anade un libro a la coleccion. 
+     * Cada nuevo libro lleva un id distinto y consecutivo al anterior.
+     * @param isbn El isbn.
+     * @param titulo El titulo del libro.
+     * @param autor El autor/autores del libro.
+     * @param numPags El numero de paginas del libro.
+     */
+    public void addLibro(String isbn, String titulo, String autor, int ano, int numPags) {
+        libros.add(new Libro(id, isbn, titulo, autor, ano, numPags));
+        id++;
+    }
+    
+    /**
+     * Anade todos los libros listados en un archivo de texto.
+     */
+    public void addLibro(String rutaArchivo){
+        try {
+            File archivo = new File(rutaArchivo);
+            Scanner sc = new Scanner(archivo);
+            while (sc.hasNextLine()) {
+                libros.add(extraerInfoLibro(sc.nextLine()));
+            }
+            sc.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Formato del archivo '[titulo] # [isbn] # [autor] # [ano] # [numPags]
+     */
+    public Libro extraerInfoLibro(String infoLibro) {
+        Libro libro = null;
+        String[] partes = infoLibro.split(" # ");
+        libro = new Libro(id, partes[1], partes[0], partes[2],Integer.parseInt(partes[3]), Integer.parseInt(partes[4]));
+        id++;
+        return libro;
+    }
+    
     
     /**
      * @return Devuelve TRUE si el indice es valido para la coleccion libros. FALSE si no lo es.
@@ -42,7 +98,7 @@ public class OrganizadorLibros {
         if(librosAImprimir.size() > 0){
             System.out.println("ID\tISBN\t\tAutor/es\t\tPags\tAno\tTitulo");
             for(Libro libro : librosAImprimir){
-                System.out.println(libro.getInfo());
+                System.out.println(libro);
             }
         }
     }
@@ -81,19 +137,6 @@ public class OrganizadorLibros {
      */
     public void mostrarTodos() {
         imprimir(libros);
-    }
-    
-    /**
-     * Anade un libro a la coleccion. 
-     * Cada nuevo libro lleva un id distinto y consecutivo al anterior.
-     * @param isbn El isbn.
-     * @param titulo El titulo del libro.
-     * @param autor El autor/autores del libro.
-     * @param numPags El numero de paginas del libro.
-     */
-    public void addLibro(String isbn, String titulo, String autor, int ano, int numPags) {
-        libros.add(new Libro(id, isbn, titulo, autor, ano, numPags));
-        id++;
     }
     
     /**
