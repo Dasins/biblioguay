@@ -1,0 +1,10 @@
+titulo1 # isbn1 # autor1 # 2011 # 1
+titulo2 # isbn2 # autor2 # 2012 # 2
+titulo3 # isbn3 # autor3 # 2011 # 1
+titulo3 # isbn3 # autor3 # 2011 # 1
+titulo4 # isbn4 # autor2 # 2012 # 1
+titulo4 # isbn4 # autor2 # 2014 # 5
+titulo6 # isbn5 # autor6 # 2014 # 6
+titulo1 # isbn1 # autor1 # 2011 # 2
+titulo8 # isbn3 # autor8 # 2012 # 4
+titulo9 # isbn5 # autor9 # 2012 # 5

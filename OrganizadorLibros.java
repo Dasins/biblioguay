@@ -69,9 +69,9 @@ public class OrganizadorLibros {
     }
     
     /**
-     * Formato del archivo '[titulo] # [isbn] # [autor] # [ano] # [numPags]
+     * Extrae la informacion del escaner y la convierte en un libro
      */
-    public Libro extraerInfoLibro(String infoLibro) {
+    private Libro extraerInfoLibro(String infoLibro) {
         Libro libro = null;
         String[] partes = infoLibro.split(" # ");
         libro = new Libro(id, partes[1], partes[0], partes[2],Integer.parseInt(partes[3]), Integer.parseInt(partes[4]));
@@ -79,6 +79,25 @@ public class OrganizadorLibros {
         return libro;
     }
     
+    /**
+     * Muestra los libros de cada ano:
+     */
+    public void mostrarPorAno() {
+        ArrayList<Libro> copiaLibros = new ArrayList<>(libros);
+        System.out.println("ID\tISBN\t\tAutor/es\t\tPags\tAno\tTitulo");
+        while(copiaLibros.size() > 0){
+            int buscado = copiaLibros.get(0).getAno();
+            System.out.println(buscado + ":");
+            for(int i = 0; i < copiaLibros.size(); i++){
+                Libro libro = copiaLibros.get(i);
+                if(libro.getAno() == buscado){
+                    System.out.println(libro);
+                    copiaLibros.remove(libro);
+                    i--;
+                }
+            }
+        }
+    }
     
     /**
      * @return Devuelve TRUE si el indice es valido para la coleccion libros. FALSE si no lo es.
@@ -262,22 +281,4 @@ public class OrganizadorLibros {
        }
     }
     
-    /**
-     * Metodo temporal para testing. Anade libros a la coleccion.
-     */
-    public void test() {
-        addLibro("9788431615345","El Conde Lucanor","Don Juan Manuel", 2014, 208);
-        addLibro("9788431635176","Zalacain el Aventurero","Pio Baroja", 2014, 272);
-        addLibro("9788441421745","La Dama del Alba","Alex Casona", 2006, 144);
-        addLibro("9788441421745","La Dama del Alva","Alex Casona", 2006, 144);
-        addLibro("9788441421745","La Dama del Alba","Alex Casona", 2006, 144);
-        addLibro("9788466716802","Flor de Leyendas","Alex Casona", 2004, 224);
-        addLibro("9788441421523","La Barca Sin Pescador","Alex Casona", 2009, 104);
-        addLibro("9788437605227","El Arbol de la Ciencia","Pio Baroja", 2004, 304);
-        addLibro("9788401019180","Las Vrumaz del Miedo","Rafael Abalos", 2017, 480);
-        addLibro("9788401019180","Las Vrumas del Miedo","Rafael Abalos", 2017, 480);
-        addLibro("9788401019180","Las Brumaz del Miedo","Rafael Abalos", 2017, 480);
-        addLibro("9788401019180","Las Brumas del Miedo","Rafael Abalos", 2017, 480);
-        addLibro("9788401019180","Las Brumas del Miedo","Rafael Abalos", 2017, 480);
-    }
 }
